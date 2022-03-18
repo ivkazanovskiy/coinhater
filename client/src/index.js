@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from "./redux/store";
-import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -13,11 +11,9 @@ const queryClient = new QueryClient()
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
         <BrowserRouter >
           <App />
         </BrowserRouter >
-      </Provider>
     </QueryClientProvider>
   </React.StrictMode>
   ,
