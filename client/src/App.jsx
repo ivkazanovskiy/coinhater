@@ -1,43 +1,32 @@
+import { Routes, Route } from 'react-router-dom'
 
-import Login from './components/Login/Login';
-import Registration from './components/Registration/Registration';
-import Home from './components/Home/Home';
-import NavBar from './components/NavBar/NavBar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { authUser, unAuthUser } from './redux/actionCreators/userAC';
-
+import Topmenu from './components/Topmenu';
+import AllArtists from './Pages/AllArtists';
+import AllSongs from './Pages/AllSongs';
+import EditArtist from './Pages/EditArtist';
+import EditSong from './Pages/EditSong';
+import NewArtist from './Pages/NewArtist';
+import NewSong from './Pages/NewSong';
 
 function App() {
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (localStorage.getItem('auth_token')) {
-
-      fetch('/api/checkUser', {
-        headers: {
-          'authorization': `Bearer ${localStorage.getItem('auth_token')}`
-        },
-      })
-        .then(response => (response.ok) ? dispatch(authUser()) : dispatch(unAuthUser()))
-    }
-  }, [dispatch])
-
-
-
   return (
-    <BrowserRouter >
-      <NavBar />
+    <>
+      <Topmenu />
       <section className="flex justify-center">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registration" element={<Registration />} />
+          <Route path="/" element={<AllSongs />} />
+
+          <Route path="/artists" element={<AllArtists />} />
+          <Route path="/artists/new" element={<NewArtist />} />
+          <Route path="/artists/edit/:id" element={<EditArtist />} />
+
+          <Route path="/songs" element={<AllSongs />} />
+          <Route path="/songs/new" element={<NewSong />} />
+          <Route path="/songs/edit/:id" element={<EditSong />} />
         </Routes>
       </section>
-    </BrowserRouter >
+    </>
   );
 }
 

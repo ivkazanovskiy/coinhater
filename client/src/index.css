@@ -3,7 +3,22 @@
 @tailwind utilities;
 
 @layer components{
-  .b{
-  @apply border-2 border-black
+  .btn-song{
+  @apply p-2 rounded-full border border-black
+  }
+  .btn-menu{
+    @apply p-4 rounded-full border bg-white hover:bg-slate-400
+    }
+
+  .btn-form{
+    @apply p-2 rounded-full border border-slate-400 hover:bg-slate-200
+    }
+
+  .inp-text{
+    @apply p-2 border border-black rounded-md text-center w-full
+  }
+
+  .select{
+    @apply p-2 border border-black rounded-md text-center 
   }
 }

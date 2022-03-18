@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "drop" : "npx sequelize db:migrate:undo:all && npx sequelize db:migrate && npx sequelize db:seed:all",
     "dev": "nodemon app.js --ignore ./sessions",
-    "start": "node app.js"
+    "start": "npx sequelize db:migrate && node app.js"
   },
   "author": "",
   "license": "ISC",

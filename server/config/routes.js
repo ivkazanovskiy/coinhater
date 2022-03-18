@@ -1,12 +1,9 @@
-const loginRouter = require('../routes/loginRouter');
-const registrationRouter = require('../routes/registrationRouter');
-const checkUserRouter = require('../routes/checkUserRouter');
-const authUser = require('../middleware/authUser');
+const artistRouter = require('../routes/artistRouter');
+const songRouter = require('../routes/songRouter');
 
 function routes(app) {
-  app.use('/api/login', loginRouter);
-  app.use('/api/registration', registrationRouter);
-  app.use('/api/checkUser', authUser, checkUserRouter);
+  app.use('/api/artists', artistRouter);
+  app.use('/api/songs', songRouter);
 }
 
 module.exports = routes;
