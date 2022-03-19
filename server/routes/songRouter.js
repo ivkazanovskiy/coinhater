@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
       where: songsCondition,
       raw: true,
       attributes: ['id', 'name'],
-      // TODO: разобраться с сортировкой
-      order: ['name'],
+      order: [[Artist, 'name'], ['name']],
       include: {
         model: Artist,
         where: artistsCondition,
         attributes: ['id', 'name'],
       },
+
     });
 
     if (songs.length === 0) return res.sendStatus(204);

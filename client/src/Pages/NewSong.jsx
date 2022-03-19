@@ -8,7 +8,6 @@ function NewSong(props) {
   const songRef = useRef()
   const status = useRef()
 
-  const queryClient = useQueryClient()
   const allArtistsQuery = useQuery('allAtrists', () => axios({
     url: '/api/artists'
   }))
@@ -20,6 +19,7 @@ function NewSong(props) {
     }), {
     onSuccess: (res) => {
       status.current = 'Композиция добавлена в базу'
+      songRef.current.value = ''
     },
     onError: (err) => {
       switch (err.response.status) {

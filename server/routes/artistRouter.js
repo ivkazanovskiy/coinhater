@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
       where: artistsCondition,
       raw: true,
       attributes: ['id', 'name'],
-      // TODO: добавить сортировку вне зависимости от регистра
       order: ['name'],
     });
 

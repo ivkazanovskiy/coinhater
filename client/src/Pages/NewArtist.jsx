@@ -14,6 +14,7 @@ function NewArtist(props) {
     }), {
     onSuccess: (res) => {
       status.current = 'Исполнитель добавлен в базу'
+      artistNameRef.current.value = ''
     },
     onError: (err) => {
       switch (err.response.status) {
