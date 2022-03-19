@@ -1,16 +1,25 @@
 const router = require('express').Router();
 const { Song, Artist } = require('../db/models');
+const { setPaginationSong } = require('../helpers/pagination');
+const { setArtistsCondition, setSongsCondition } = require('../helpers/whereConditions');
 
 router.get('/', async (req, res) => {
+  const { query } = req;
+  const artistsCondition = setArtistsCondition(query);
+  const songsCondition = setSongsCondition(query);
+  const pagination = setPaginationSong(query);
+
   try {
     const songs = await Song.findAll({
-      where: {},
+      ...pagination,
+      where: songsCondition,
       raw: true,
       attributes: ['id', 'name'],
       // TODO: разобраться с сортировкой
       order: ['name'],
       include: {
         model: Artist,
+        where: artistsCondition,
         attributes: ['id', 'name'],
       },
     });

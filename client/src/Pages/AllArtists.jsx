@@ -1,21 +1,19 @@
 import React from 'react';
-import { useQuery } from 'react-query'
-import axios from 'axios'
-import ArtistCard from '../components/ArtistCard';
+import { useLocation } from 'react-router-dom';
+
+import ArtistList from '../components/ArtistList';
+import ArtistFilter from '../components/ArtistFilter';
 
 function AllArtists(props) {
 
-  const allArtistsQuery = useQuery('allArtists', () => axios(`/api/artists`))
-
-  if (allArtistsQuery.isLoading) return (<></>)
-  if (allArtistsQuery.isError) return (<>Ошибка</>)
-
-console.log(allArtistsQuery.data.data);
+  const { search: query } = useLocation()
 
   return (
-    <div className=" flex flex-col gap-2 mt-4">
-      {allArtistsQuery.data.data.map(el => <ArtistCard key={el.id} artistData={el} />)}
+    <div className="flex h-full">
+      <ArtistFilter query={query} />
+      <ArtistList query={query} />
     </div>
+
   );
 }
 

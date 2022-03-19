@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer components{
+
+  #root{
+    @apply w-full h-screen flex flex-col
+  }
   .btn-song{
   @apply p-2 rounded-full border border-black
   }

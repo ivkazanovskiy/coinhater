@@ -43,12 +43,18 @@ function EditArtist(props) {
   const artistInfo = artistQuery.data.data
 
   return (
-    <div className="flex flex-col mt-4 gap-2 max-w-96">
+    <form className="flex flex-col mx-auto mt-4 gap-2 max-w-md ">
       <label htmlFor="artistName" className="text-center">Имя исполнителя:</label>
-      <input type="text" ref={artistName} name="artistName" id="artistName" className="inp-text" defaultValue={artistInfo.name} />
-      <button className="btn-form" onClick={() => saveArtist.mutate()}>Изменить</button>
+      <input type="text" ref={artistName}
+        name="artistName" id="artistName"
+        className="inp-text" defaultValue={artistInfo.name}
+      />
+      <button className="btn-form" onClick={(event) => {
+        event.preventDefault();
+        saveArtist.mutate()
+      }}>Изменить</button>
       <div className="text-center">{!!status.current && status.current}</div>
-    </div >
+    </form >
   );
 }
 

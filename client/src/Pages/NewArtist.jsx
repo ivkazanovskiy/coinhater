@@ -13,8 +13,6 @@ function NewArtist(props) {
       name: artistNameRef.current.value
     }), {
     onSuccess: (res) => {
-      queryClient.invalidateQueries('allArtists')
-      queryClient.invalidateQueries('allSongs')
       status.current = 'Исполнитель добавлен в базу'
     },
     onError: (err) => {
@@ -36,12 +34,15 @@ function NewArtist(props) {
   })
 
   return (
-    <div className="flex flex-col gap-2 w-96 mt-4">
+    <form className="flex flex-col gap-2 w-full max-w-md mt-4 mx-auto">
       <label htmlFor="name" className="text-center">Введите имя исполнителя:</label>
       <input ref={artistNameRef} type="text" name="name" id="name" className="inp-text" />
-      <button className="btn-form" onClick={() => addNewArtist.mutate()}>Добавить</button>
+      <button className="btn-form" onClick={(event) => {
+        event.preventDefault();
+        addNewArtist.mutate()
+      }}>Добавить</button>
       <div className="text-center">{!!status.current && status.current}</div>
-    </div>
+    </form>
   );
 }
 

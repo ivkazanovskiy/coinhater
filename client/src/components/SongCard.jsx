@@ -4,8 +4,8 @@ import EditSongButton from './Buttons/EditSongButton';
 
 function SongCard({ songData }) {
   return (
-    <div className="flex gap-2 items-center">
-      <span className="grow text-center">{songData['Artist.name']} - {songData.name} </span>
+    <div className="flex gap-2 items-center w-3/4">
+      <span className="flex-1 text-center overflow-clip">{songData['Artist.name']} - {songData.name} </span>
       <EditSongButton songId={songData.id} />
       <DeleteSongButton songId={songData.id} />
     </div>

@@ -1,10 +1,18 @@
 const router = require('express').Router();
 const { Artist } = require('../db/models');
 const isForbidenName = require('../helpers/isForbidenName');
+const { setPaginationArtist } = require('../helpers/pagination');
+const { setArtistsCondition } = require('../helpers/whereConditions');
 
 router.get('/', async (req, res) => {
+  const { query } = req;
+  const artistsCondition = setArtistsCondition(query);
+  const pagination = setPaginationArtist(query);
+
   try {
     const artists = await Artist.findAll({
+      ...pagination,
+      where: artistsCondition,
       raw: true,
       attributes: ['id', 'name'],
       // TODO: добавить сортировку вне зависимости от регистра

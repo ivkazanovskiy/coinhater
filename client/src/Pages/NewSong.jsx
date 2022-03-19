@@ -19,7 +19,6 @@ function NewSong(props) {
       name: songRef.current.value
     }), {
     onSuccess: (res) => {
-      queryClient.invalidateQueries(`allSongs`)
       status.current = 'Композиция добавлена в базу'
     },
     onError: (err) => {
@@ -46,9 +45,9 @@ function NewSong(props) {
   const allArtistsInfo = allArtistsQuery.data.data
 
   return (
-    <div className="flex flex-col mt-4 gap-2 w-96">
+    <form className="flex flex-col gap-2 max-w-md mx-auto mt-4">
       <div className="flex gap-2">
-        <label htmlFor="artistName" className="flex flex-col gap-2">
+        <label htmlFor="artistName" className="flex flex-col flex-1 gap-2">
           <span>Имя исполнителя:</span>
           <select ref={artistRef} name="artistName" className="select">
             {allArtistsInfo.map(artist =>
@@ -58,14 +57,19 @@ function NewSong(props) {
             )}
           </select >
         </label>
-        <label htmlFor="songName" className="flex flex-col gap-2">
+        <label htmlFor="songName" className="flex flex-col flex-1 gap-2">
           <span>Название композиции</span>
           <input type="text" ref={songRef} className="inp-text" />
         </label>
       </div>
-      <button className="btn-form" onClick={() => addNewSong.mutate()}>Добавить</button>
+      <button className="btn-form" onClick={(event) => {
+        event.preventDefault()
+        addNewSong.mutate()
+      }}>
+        Добавить
+      </button>
       <div className="text-center">{!!status.current && status.current}</div>
-    </div >
+    </form >
   );
 }
 

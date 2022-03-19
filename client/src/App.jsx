@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Topmenu />
-      <section className="flex justify-center relative">
+      <section className="absolute w-full h-full pt-24">
         <Routes>
           <Route path="/" element={<AllSongs />} />
 

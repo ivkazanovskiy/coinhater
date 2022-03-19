@@ -22,7 +22,6 @@ function NewSong(props) {
       name: songRef.current.value
     }), {
     onSuccess: (res) => {
-      queryClient.invalidateQueries(`allSongs`)
       queryClient.invalidateQueries(`song-${id}`)
       status.current = 'Композиция изменена'
     },
@@ -53,9 +52,9 @@ function NewSong(props) {
   const songInfo = songQuery.data.data
 
   return (
-    <div className="flex flex-col mt-4 gap-2 w-96">
+    <form className="flex flex-col gap-2 mt-4 mx-auto max-w-md">
       <div className="flex gap-2">
-        <label htmlFor="artistName" className="flex flex-col gap-2">
+        <label htmlFor="artistName" className="flex flex-col flex-1 gap-2">
           <span>Имя исполнителя:</span>
           <select ref={artistRef} name="artistName" className="select" defaultValue={songInfo['Artist.id']}>
             {allArtistsInfo.map(artist =>
@@ -65,14 +64,17 @@ function NewSong(props) {
             )}
           </select >
         </label>
-        <label htmlFor="songName" className="flex flex-col gap-2">
+        <label htmlFor="songName" className="flex flex-col flex-1 gap-2">
           <span>Название композиции</span>
           <input type="text" ref={songRef} className="inp-text" defaultValue={songInfo.name} />
         </label>
       </div>
-      <button className="btn-form" onClick={() => saveSong.mutate()}>Изменить</button>
+      <button className="btn-form" onClick={(event) => {
+        event.preventDefault();
+        saveSong.mutate()
+      }}>Изменить</button>
       <div className="text-center">{!!status.current && status.current}</div>
-    </div >
+    </form >
   );
 }
 
