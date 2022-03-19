@@ -9,17 +9,18 @@ https://coinhater.herokuapp.com/ - deploy
 > server/db/config/config.json
 
 Запуск серверной части:
-
-**cd server && npm i && npm start**
+``` JS
+cd server && npm i && npm start
+```
 
 Стартовые сиды (запускать до добавления исполнителей в базу через API):
-
-**cd server && npm run seed**
-
+``` JS
+cd server && npm run seed
+```
 Запуск клиентской части:
-
-**cd client && npm i && npm start**
-
+``` JS
+cd client && npm i && npm start
+```
 ## API 
 Запросы осуществляются по домену (https://coinhater.herokuapp.com)
 ### Запросы связанные с исполнителями:
