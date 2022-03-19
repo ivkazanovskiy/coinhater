@@ -77,22 +77,12 @@ function SongFilter({ query }) {
           disabled={disabledDateSong} />
       </div>
       <label htmlFor="artistPart" className="flex flex-col gap-2">
-        <span>Искать в названии композиции</span>
+        <span>Искать в названии композиции:</span>
         <input type="text" name="artistPart" id="artistPart"
           className="inp-text" ref={songPartRef}
           defaultValue={songPartDefault}
         />
       </label>
-      <span>Выбрать исполнителей</span>
-      <div htmlFor="selectAtrists" className="flex flex-col flex-1 gap-2 overflow-y-auto">
-        <div id="selectAtrists" className="flex-1 pb-4 pl-2 flex flex-col">
-          {allArtistsInfo.map(el => <ArtistChechbox
-            key={`${el.id}-checked-${artistIdsDefault?.includes(el.id)}`}
-            artist={el}
-            checked={artistIdsDefault?.includes(el.id)}
-            changeSelectedArtists={changeSelectedArtists} />)}
-        </div>
-      </div>
       <div>
         <label htmlFor="paginationSongFlag" className="flex gap-2 items-center">
           <input type="checkbox" name="paginationSongFlag"
@@ -121,6 +111,21 @@ function SongFilter({ query }) {
           </label>
         </div>
       </div>
+      <span>Выбрать исполнителей:</span>
+      <div htmlFor="selectAtrists" className="flex flex-col flex-1 gap-2 overflow-y-auto">
+        <div id="selectAtrists" className="flex-1 pb-4 pl-2 flex flex-col">
+          {allArtistsInfo.length > 0
+            ?
+            allArtistsInfo.map(el => <ArtistChechbox
+              key={`${el.id}-checked-${artistIdsDefault?.includes(el.id)}`}
+              artist={el}
+              checked={artistIdsDefault?.includes(el.id)}
+              changeSelectedArtists={changeSelectedArtists} />)
+            : <span>Исполнители отсутствуют</span>
+          }
+        </div>
+      </div>
+
     </aside >
   );
 }

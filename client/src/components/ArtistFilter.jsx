@@ -53,7 +53,7 @@ function ArtistFilter({ query }) {
           disabled={disabledDateArtist} />
       </div>
       <label htmlFor="songPart" className="flex flex-col gap-2">
-        <span>Искать в названии исполнителя</span>
+        <span>Искать в названии исполнителя:</span>
         <input type="text" name="songPart" id="songPart"
           className="inp-text" ref={artistPartRef}
           defaultValue={artistPartDefault}

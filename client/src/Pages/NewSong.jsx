@@ -39,7 +39,7 @@ function NewSong(props) {
   if (allArtistsQuery.isLoading) return (<>Загрузка</>)
   if (allArtistsQuery.isError) return (<>Ошибка</>)
   if (allArtistsQuery.data.status === 204) return (
-    <div className="mt-2">Сначала добавьте исполнителя в базу</div>
+    <div className="w-full mt-2 text-center">Сначала добавьте исполнителя в базу</div>
   )
 
   const allArtistsInfo = allArtistsQuery.data.data
