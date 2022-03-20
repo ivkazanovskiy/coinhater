@@ -17,7 +17,7 @@ function NewSong(props) {
   }))
 
   const saveSong = useMutation(() =>
-    axios.put(`/api/songs/edit/${id}`, {
+    axios.put(`/api/songs/${id}`, {
       artistId: artistRef.current.value,
       name: songRef.current.value
     }), {

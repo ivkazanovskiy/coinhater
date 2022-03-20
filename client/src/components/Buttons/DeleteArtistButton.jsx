@@ -6,7 +6,7 @@ function DeleteArtistButton({ artistId }) {
   const queryClient = useQueryClient()
 
   const deleteArtist = useMutation(() =>
-    axios.delete(`/api/artists/delete/${artistId}`)
+    axios.delete(`/api/artists/${artistId}`)
     , {
       onSuccess: () => {
         queryClient.invalidateQueries('allArtists')

@@ -1,15 +1,14 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 
 function NewArtist(props) {
 
-  const queryClient = useQueryClient()
   const status = useRef()
   const artistNameRef = useRef()
 
   const addNewArtist = useMutation(() =>
-    axios.post('/api/artists/new', {
+    axios.post('/api/artists', {
       name: artistNameRef.current.value
     }), {
     onSuccess: (res) => {

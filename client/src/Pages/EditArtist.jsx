@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import axios from 'axios'
@@ -12,7 +12,7 @@ function EditArtist(props) {
   const queryClient = useQueryClient()
 
   const saveArtist = useMutation(() =>
-    axios.put(`/api/artists/edit/${id}`, {
+    axios.put(`/api/artists/${id}`, {
       name: artistName.current.value
     }), {
     onSuccess: (res) => {

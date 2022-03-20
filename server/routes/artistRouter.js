@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     if (artists.length === 0) return res.sendStatus(204);
     return res.status(200).json(artists);
   } catch (err) {
-    console.log(err.message);
+    req.error = err;
     return res.sendStatus(500);
   }
 });
@@ -39,12 +39,12 @@ router.get('/:id', async (req, res) => {
     if (!artist) return res.sendStatus(204);
     return res.status(200).json(artist);
   } catch (err) {
-    console.log(err.message);
+    req.error = err;
     return res.sendStatus(500);
   }
 });
 
-router.post('/new', async (req, res) => {
+router.post('/', async (req, res) => {
   const { name } = req.body;
   if (isForbidenName(name)) return res.sendStatus(451);
   if (!name || typeof name !== 'string') return res.sendStatus(400);
@@ -55,12 +55,12 @@ router.post('/new', async (req, res) => {
   } catch (err) {
     if (err.original.code === '23505') return res.status(409).json({ message: 'Такой исполнитель уже существует' });
 
-    console.log(err.message);
+    req.error = err;
     return res.sendStatus(500);
   }
 });
 
-router.put('/edit/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
   if (isForbidenName(name)) return res.sendStatus(451);
@@ -71,19 +71,19 @@ router.put('/edit/:id', async (req, res) => {
     if (!updated) return res.sendStatus(406);
     return res.sendStatus(201);
   } catch (err) {
-    console.log(err.message);
+    req.error = err;
     return res.sendStatus(500);
   }
 });
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
     await Artist.destroy({ where: { id } });
     return res.sendStatus(200);
   } catch (err) {
-    console.log(err.message);
+    req.error = err;
     return res.sendStatus(500);
   }
 });

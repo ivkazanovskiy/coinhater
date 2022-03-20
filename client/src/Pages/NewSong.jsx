@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import axios from 'axios'
 
 function NewSong(props) {
@@ -13,7 +13,7 @@ function NewSong(props) {
   }))
 
   const addNewSong = useMutation(() =>
-    axios.post(`/api/songs/new`, {
+    axios.post(`/api/songs`, {
       artistId: artistRef.current.value,
       name: songRef.current.value
     }), {
