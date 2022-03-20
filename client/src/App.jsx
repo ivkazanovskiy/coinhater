@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Topmenu />
-      <section className="absolute w-full h-full pt-24">
+      <section className="w-full h-full pt-24 ">
         <Routes>
           <Route path="/" element={<AllSongs />} />
 
